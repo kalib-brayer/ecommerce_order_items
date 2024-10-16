@@ -20,7 +20,6 @@ datagroup: daily {
 
 ### Explore to ask customer behavior and order summary questions
 explore: order_items{
-  required_access_grants: [explore_assistant_tester]
   label: "Orders and Users"
   description: "The explore to ask questions about orders and the users that have purchased"
 
