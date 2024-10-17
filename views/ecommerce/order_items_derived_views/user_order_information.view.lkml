@@ -29,17 +29,20 @@ view: user_order_information {
   dimension: customer_order_tier {
     type: string
     sql: CASE
-      When ${count_all_orders} = 1 then "Single Purchase Customer"
-      When ${count_all_orders} > 1 then "Multi Purchase Customer"
-      else "No Purchase Customer"
-      end ;;
+          When ${count_all_orders} = 1 then "Single Purchase Customer"
+          When ${count_all_orders} > 1 then "Multi Purchase Customer"
+          else "No Purchase Customer"
+          end ;;
+    description: "Buckets customers based on number of purchases into no purchases, single purchase, multiple purchases purchases.  Use this field with count of customers or total sales."
   }
   dimension: user_spend_buckets{
     type: string
     sql: Case
-      when ${total_sales} > 200 then "Big spender"
-      else "Small Spender"
-      end;;
+              when ${total_sales} > 200 then "Big Spender"
+                  else "Small Spender"
+            end;;
+    description: "Determines if customer is a small or big spender.  Use this field for pivots."
+
   }
   measure: sum_lifetime_sales{
     description: "Sums all users total sales"
@@ -57,9 +60,19 @@ view: user_order_information {
   }
   measure: percent_of_repeat_customers {
     type: number
+    description: "this field is a percentage of total customers who have returned or made multiple purchaeses.   Use this field for question like:
+    What percentage of buyers came back to shop again?
+    How often do customers come back to make another purchase?"
     value_format_name: percent_0
     sql: ${count_multi_purchase_customer}/nullif(${count},0) ;;
   }
+  measure: percent_of_one_time_customers {
+    description: "this field is a percentage of total customers who have made only 1 purchase."
+    type: number
+    value_format_name: percent_0
+    sql: ${count_single_purchase_customer}/nullif(${count},0) ;;
+  }
+
   measure: count {
     type: count
   }

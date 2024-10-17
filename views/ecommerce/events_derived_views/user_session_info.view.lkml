@@ -27,7 +27,7 @@ view: user_session_info {
     sql: ${count_unique_sessions} > 1 ;;
   }
   dimension: is_returning_customer {
-    description: "A user who has more than one purchase "
+    description: "A user who has more than one purchase.  Use this field as a filter only for questions around customers or buyers who are returning or are frequent shoppers. "
     type: yesno
     sql: ${number_of_purchases} > 1 ;;
   }
@@ -36,6 +36,8 @@ view: user_session_info {
     filters: [is_returning_visitor: "yes"]
   }
   measure: count_of_returning_customers{
+    description: "Count of customers who have made more than 1 purchase.  This field is calculated in US Dollars. Use this field for questions around count or quantity"
+    tags: ["Repeat shoppers, frequent buyers"]
     type: count
     filters: [is_returning_customer: "yes"]
   }

@@ -45,11 +45,12 @@ view: order_items {
     drill_fields: [order_id, id]
   }
   dimension_group: created {
-    tags: ["date_filter"]
     label: "Item Paid"
-    description: "The timeframe the item was paid for fully"
+    description: "Date and timestamp for orders placed.  Use this date field in order related date filters and date pivots and relative date comparisions.
+    This is the most popular date field for queries related to orders, order items, and purchases for Explore Assistant."
+    tags: ["purchase date, order date, placed date, paid date"]
     type: time
-    timeframes:  [raw, time, date, week, month,month_num,month_name,hour_of_day,day_of_week,day_of_week_index,day_of_month,day_of_year,year]
+    timeframes:  [raw, time, date, week, month,month_num,month_name,hour_of_day,day_of_week,day_of_week_index,day_of_month,day_of_year,year,quarter]
     sql: ${TABLE}.created_at ;;
   }
   dimension_group: returned {
@@ -197,13 +198,37 @@ view: order_items {
   measure: total_sales {
     group_label: "Sales Fields"
     label: "Total Sales"
-    description: "Sum of all item's sale price"
+    description: "Sum of all item's sale price.  This field is in US dollars.  Use this field when a user asks a questions with a dollar amount.
+    Use this field for questions on best performance, best sellers,highest performing, lowest peforming, worst performance, worst selling.  Amount spent by the customer."
+
+    tags: ["Total Revenue, Total Sales Price, Sales Amount, Order Value, Total Amount,Total Spend,customer lifetime value,
+    invoice amount, and Transaction Total"]
     type: sum
     sql: ${sale_price} ;;
     drill_fields: [users.id,users.first_and_last_name,id,products.brand,distribution_centers.id, created_date,
       sale_price,]
     value_format_name: usd_0
   }
+
+
+  measure: average_order_value {
+    type: number
+    label: "AOV"
+    description: "average value per order.  Typical questions include: What’s the typical amount customers spend per order?
+    How much do people usually buy in a single transaction?
+    What is the average amount spent on each purchase?
+    How big is the typical order in dollar value?
+    What’s the usual value of a customer’s order?
+    Are customers spending more or less per order lately?
+    How much do customers usually pay per checkout?
+    What’s the average size of the orders we receive?
+    Is the amount customers spend per purchase increasing?
+    How much revenue do we get on average from each sale?"
+    tags: ["Mean Order Value, Average Transaction Value, Order Average, Average Purchase Value,Per-Order Value,Transaction Average,Mean Purchase Size
+    ,Order Size Average,Revenue per Order (RPO),Purchase Amount Average"]
+    sql: ${total_sales} / nullif(${count_all_orders},0) ;;
+  }
+
 
 # Liquid changing the visual appearance of field values
   dimension: status {

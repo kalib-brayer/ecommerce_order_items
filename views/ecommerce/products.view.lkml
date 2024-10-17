@@ -15,13 +15,17 @@ view: products {
 ### Product Description Fields {
   dimension: category {
     label: "Category"
-    description: "Category of a product"
+    description: "Category of a product. Many brands roll up to a category.  Category values include: Outerwear & Coats,Jeans,Sweaters,Suits & Sport Coats  ,Swim,
+    Fashion Hoodies & SweatshirtsSleep & Lounge,Dresses,Active,Shorts,Accessories,Intimates,Tops & Tees,Pants,Blazers & Jackets,Maternity,
+    Pants & Capris,Underwear,Plus,Skirts,Suits,Socks,Socks & Hosiery,Leggings,Jumpsuits & Rompers,Clothing Sets"
     type: string
     sql: ${TABLE}.category ;;
   }
   dimension: brand {
     label: "Brand"
-    description: "Brand of a product "
+    description: "Brand of a product.  Popular brand values include Calvin Klein, Diesel, Carhartt, True Religion, 7 For All Mankind, Ray-Ban, Tommy Hilfiger, Columbia, and North Face
+    Do not pivot on this field unless it is filtered."
+    tags: ["Label,Manufacturer, Companies, Makers"]
     type: string
     sql: ${TABLE}.brand ;;
     link: {
@@ -32,7 +36,8 @@ view: products {
   }
   dimension: name {
     label: "Product Name"
-    description: "Name of the product"
+    description: "Name of the product.  There are many products to a brand."
+    tags: ["item"]
     type: string
     sql: ${TABLE}.name ;;
     link: {
@@ -44,7 +49,7 @@ view: products {
 
   dimension: department {
     label: "Department"
-    description: "Department of the product"
+    description: "Department of the product.  Values include men and women.  Do not include this field if a user asks for gender. This is a good field for pivots."
     type: string
     sql: ${TABLE}.department ;;
   }
@@ -123,6 +128,8 @@ view: products {
 
   measure: total_cost {
     # required_access_grants: [can_view_financial_data]
+    description: "Cost of an item or product.  The amount paid for the item by the company.  Do not use this field for inquires about customers"
+    tags: ["total charges, amount spent"]
     type: sum
     sql: ${cost} ;;
     value_format_name: usd_0
@@ -131,6 +138,8 @@ view: products {
     # required_access_grants: [can_view_financial_data]
     type: number
     sql:  ${total_retail_price} - ${total_cost} ;;
+    description: "difference between revenue and costs"
+    tags: ["markup, profitability"]
     value_format_name: usd_0
   }
 
@@ -154,6 +163,8 @@ view: products {
 
   measure: gross_margin_percentange {
     label: "Gross Margin %"
+    description: "gross margin divided by total sales.  gross margin percentage."
+    tags: ["profitability percentage"]
     type: number
     sql:  ${gross_margin} / nullif(${total_retail_price},0) ;;
     value_format_name: percent_1

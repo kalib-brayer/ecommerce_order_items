@@ -23,23 +23,26 @@ view: users {
 ### User Demographics Fields {
   dimension: age {
     label: "Age"
-    description: "Age of a user"
+    description: "Age of a user.  Use this field in questions about age that use words such as greater than, less than, over, under.  Do not pivot on this field"
     type: number
     sql: ${TABLE}.age ;;
   }
 
   dimension: age_tiers {
-    label: "Age Tiers"
-    description: "Buckets ages for grouped analysis"
+    label: "Segmented Age Groupings"
+    description: "Buckets ages for grouped analysis.  Include this field in questions about buying behavior or questions about age profile or age groupings"
     type: tier
     tiers: [18,25,40,60]
     style: integer
     sql: ${age} ;;
+    tags: ["Demographics"]
     drill_fields: [gender, country]
   }
 
   dimension: gender {
     type: string
+    description: "gender of a user,customer,client"
+    tags: ["Demographics, sex, males and females,men,women,customer base,identities"]
     sql: ${TABLE}.gender ;;
   }
 ### End of Profile Fields }
@@ -48,7 +51,7 @@ view: users {
   dimension: user_location {
     group_label: "Locations"
     label: "User_Location"
-    description: "The latitude and longitude of a user"
+    description: "The latitude and longitude of a user.  use with map viz only.  use on geographical questions about users"
     type: location
     sql_latitude: ${latitude};;
     sql_longitude: ${longitude} ;;
@@ -56,7 +59,8 @@ view: users {
   dimension: country {
     group_label: "Locations"
     label: "Country"
-    description: "User's Country"
+    description: "Country of user, customers, client.  Use in map or table viz only.  Geographical info"
+    tags: ["Demographics"]
     type: string
     map_layer_name: countries
     sql: ${TABLE}.country ;;
@@ -65,7 +69,8 @@ view: users {
   dimension: city {
     group_label: "Locations"
     label: "City"
-    description: "User's City"
+    description: "City of user, customers, client.  Use in map or table viz only.Geographical info"
+    tags: ["Location"]
     type: string
     sql: ${TABLE}.city ;;
     drill_fields: [gender,products.brand, postal_code]
@@ -81,6 +86,7 @@ view: users {
   dimension: street_address {
     group_label: "Locations"
     label: "Street Address"
+    tags: ["Location"]
     description: "User's street address"
     type: string
     sql: ${TABLE}.street_address ;;
@@ -165,14 +171,13 @@ view: users {
     sql: ${TABLE}.latitude ;;
   }
   dimension: longitude {
-    type: number
     hidden: yes
     sql: ${TABLE}.longitude ;;
   }
   dimension: first_and_last_name {
     # required_access_grants: [admin_only]
-    label: "Full Name"
-    description: "Full name of a user"
+    label: "Customer Full Name"
+    description: "Full name of a user.  Include this field in questions about a specific customer.  Only use this field in a table viz"
     type: string
     # hidden: yes
     sql: concat( ${first_name}," ", ${last_name}) ;;
@@ -205,6 +210,8 @@ view: users {
   }
   dimension: state {
     group_label: "Locations"
+    description: "Geographical info"
+    tags: ["Location,area,region,different parts of the country"]
     type: string
     sql: ${TABLE}.state ;;
     drill_fields: [geographical_drill_set*]
