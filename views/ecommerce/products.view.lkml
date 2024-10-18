@@ -138,7 +138,7 @@ view: products {
     # required_access_grants: [can_view_financial_data]
     type: number
     sql:  ${total_retail_price} - ${total_cost} ;;
-    description: "difference between revenue and costs"
+    description: "gross profit"
     tags: ["markup, profitability"]
     value_format_name: usd_0
   }
@@ -163,7 +163,7 @@ view: products {
 
   measure: gross_margin_percentange {
     label: "Gross Margin %"
-    description: "gross margin divided by total sales.  gross margin percentage."
+    description: "gross margin divided by total sales.  gross margin percentage.  Only use this field when the user mentions percentage or %"
     tags: ["profitability percentage"]
     type: number
     sql:  ${gross_margin} / nullif(${total_retail_price},0) ;;
