@@ -27,7 +27,8 @@ view: user_session_info {
     sql: ${count_unique_sessions} > 1 ;;
   }
   dimension: is_returning_customer {
-    description: "A user who has more than one purchase.  Use this field as a filter only for questions around customers or buyers who are returning or are frequent shoppers. "
+    description: "A user who has more than one purchase.  Use this field as a filter only for questions around customers or buyers who are returning or are frequent shoppers.
+                  return value 'y' for questions on returning customers only.  Return value 'n' for questions on non returning customers only."
     type: yesno
     sql: ${number_of_purchases} > 1 ;;
   }
