@@ -59,7 +59,7 @@ view: users {
   dimension: country {
     group_label: "Locations"
     label: "Country"
-    description: "Country of user, customers, client.  Use in map or table viz only.  Geographical info"
+    description: "Country of user, customers, client.  Use in map or table viz only.  Geographical info.  Always return full country names. If a users asks about the UK then return United Kingdom."
     tags: ["Demographics"]
     type: string
     map_layer_name: countries
