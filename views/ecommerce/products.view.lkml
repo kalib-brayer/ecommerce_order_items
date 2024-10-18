@@ -138,7 +138,7 @@ view: products {
     # required_access_grants: [can_view_financial_data]
     type: number
     sql:  ${total_retail_price} - ${total_cost} ;;
-    description: "gross profit"
+    description: "gross profit.  if user asks for profitability then use gross margin."
     tags: ["markup, profitability"]
     value_format_name: usd_0
   }
