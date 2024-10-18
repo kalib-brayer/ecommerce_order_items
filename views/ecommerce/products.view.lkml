@@ -17,7 +17,7 @@ view: products {
     label: "Category"
     description: "Category of a product. Many brands roll up to a category.  Category values include: Outerwear & Coats,Jeans,Sweaters,Suits & Sport Coats  ,Swim,
     Fashion Hoodies & SweatshirtsSleep & Lounge,Dresses,Active,Shorts,Accessories,Intimates,Tops & Tees,Pants,Blazers & Jackets,Maternity,
-    Pants & Capris,Underwear,Plus,Skirts,Suits,Socks,Socks & Hosiery,Leggings,Jumpsuits & Rompers,Clothing Sets"
+    Pants & Capris,Underwear,Plus,Skirts,Suits,Socks,Socks & Hosiery,Leggings,Jumpsuits & Rompers,Clothing Sets.  Do not pivot on category unless category is also filtered"
     type: string
     sql: ${TABLE}.category ;;
   }
