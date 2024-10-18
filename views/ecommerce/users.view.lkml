@@ -4,7 +4,7 @@ view: users {
 
   dimension: id {
     label: "User ID"
-    description: "Uniquely identifies a user"
+    description: "Uniquely identifies a user."
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;

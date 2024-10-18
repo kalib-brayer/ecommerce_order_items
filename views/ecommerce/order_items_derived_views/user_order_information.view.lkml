@@ -3,7 +3,7 @@ view: user_order_information {
     explore_source: order_items {
       column: id { field: users.id }
       column: total_sales {}
-      column: count_all_orders {}
+      column: count_of_orders { field: orders.count_of_orders }
     }
     # datagroup_trigger: daily
   }
@@ -13,7 +13,7 @@ view: user_order_information {
   }
   dimension: is_multi_purchase_customer {
     type: yesno
-    sql: ${count_all_orders} > 1 ;;
+    sql: ${count_of_orders} > 1 ;;
   }
   dimension: is_big_spender {
     type: yesno
@@ -23,14 +23,14 @@ view: user_order_information {
     type: number
     value_format_name: usd_0
   }
-  dimension: count_all_orders {
+  dimension: count_of_orders {
     type: number
   }
   dimension: customer_order_tier {
     type: string
     sql: CASE
-          When ${count_all_orders} = 1 then "Single Purchase Customer"
-          When ${count_all_orders} > 1 then "Multi Purchase Customer"
+          When ${count_of_orders} = 1 then "Single Purchase Customer"
+          When ${count_of_orders} > 1 then "Multi Purchase Customer"
           else "No Purchase Customer"
           end ;;
     description: "Buckets customers based on number of purchases into no purchases, single purchase, multiple purchases purchases.  Use this field with count of customers or total sales."
