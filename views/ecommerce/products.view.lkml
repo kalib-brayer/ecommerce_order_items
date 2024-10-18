@@ -163,7 +163,7 @@ view: products {
 
   measure: gross_margin_percentange {
     label: "Gross Margin %"
-    description: "gross margin divided by total sales.  gross margin percentage.  Only use this field when the user mentions percentage or %"
+    description: "gross margin percentage.  Only use this field when the user mentions percentage or %"
     tags: ["profitability percentage"]
     type: number
     sql:  ${gross_margin} / nullif(${total_retail_price},0) ;;
