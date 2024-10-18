@@ -96,7 +96,8 @@ view: users {
 ### Date Fields {
   dimension_group: created {
     label: "User Sign-up"
-    description: "Timeframes of when a user signed-up"
+    description: "Timeframes of when a user signed-up."
+    tags: ["user acquisition, customer acquisition, customer signup"]
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.created_at ;;
