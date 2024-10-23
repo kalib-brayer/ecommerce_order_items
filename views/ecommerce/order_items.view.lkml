@@ -38,7 +38,7 @@ view: order_items {
   }
   dimension: user_id {
     label: "Customer ID"
-    description: "Uniquely identifies each customer"
+    description: "Uniquely identifies each customers"
     type: number
     #
     sql: ${TABLE}.user_id ;;
