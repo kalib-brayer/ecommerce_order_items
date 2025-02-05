@@ -107,3 +107,27 @@ explore: events {
     sql_on: ${events.viewed_product_id} = ${products.id};;
   }
 }
+
+explore: users {
+  label: "Users explore"
+  join: user_order_information {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_order_information.id} ;;
+  }
+  join: user_session_info {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_session_info.user_id};;
+  }
+  join: orders {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${users.id} = ${orders.user_id} ;;
+  }
+  join: order_items {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${users.id} = ${order_items.user_id} ;;
+  }
+}
