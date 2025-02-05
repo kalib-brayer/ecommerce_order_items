@@ -1,5 +1,5 @@
-- dashboard: business_pulse Austin
-  title: Business Pulse Austin
+- dashboard: business_pulse_austin
+  title: Business Pulse_austin
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
@@ -10,7 +10,7 @@
     model: ecommerce_order_items
     explore: users
     type: single_value
-    fields: [users.number_of_users]
+    fields: [users.count]
     limit: 500
     column_limit: 50
     dynamic_fields:
@@ -96,7 +96,7 @@
     model: ecommerce_order_items
     explore: order_items
     type: looker_line
-    fields: [order_items.created_year, order_items.total_sale_price, order_items.created_month_name]
+    fields: [order_items.created_year, order_items.total_sales, order_items.created_month_name]
     pivots: [order_items.created_year]
     fill_fields: [order_items.created_year, order_items.created_month_name]
     sorts: [order_items.created_year, order_items.created_month_name]
@@ -358,10 +358,10 @@
     model: ecommerce_order_items
     explore: users
     type: looker_boxplot
-    fields: [users.traffic_source, user_order_information.min_lifetime_revenue, user_order_information.25th_percentile_lifetime_revenue,
-      user_order_information.median_lifetime_revenue, user_order_information.75th_percentile_lifetime_revenue,
-      user_order_information.max_lifetime_revenue]
-    sorts: [user_order_information.min_lifetime_revenue desc 0]
+    fields: [users.traffic_source, user_order_information.min_lifetime_sales, user_order_information.25th_percentile_lifetime_sales,
+      user_order_information.median_lifetime_sales, user_order_information.75th_percentile_lifetime_sales,
+      user_order_information.max_lifetime_sales]
+    sorts: [user_order_information.min_lifetime_sales desc 0]
     limit: 500
     column_limit: 50
     x_axis_gridlines: false
@@ -450,8 +450,8 @@
     explore: order_items
     type: looker_grid
     fields: [products.brand, user_order_information.percent_of_repeat_customers, products.gross_margin,
-      products.gross_margin_percentange, order_items.total_sale_price, order_items.count_all_orders]
-    sorts: [order_items.total_sale_price desc]
+      products.gross_margin_percentange, order_items.total_sales, order_items.count_all_orders]
+    sorts: [order_items.total_sales desc]
     limit: 500
     column_limit: 50
     show_view_names: false
@@ -480,7 +480,7 @@
     model: ecommerce_order_items
     explore: order_items
     type: looker_grid
-    fields: [products.brand, products.category, order_items.total_sale_price]
+    fields: [products.brand, products.category, order_items.total_sales]
     sorts: [products.brand, products.category desc]
     subtotals: [products.brand]
     limit: 500
@@ -558,7 +558,7 @@
     model: ecommerce_order_items
     explore: order_items
     type: looker_google_map
-    fields: [users.country, order_items.total_sale_price]
+    fields: [users.country, order_items.total_sales]
     sorts: [order_items.total_revenue desc 0]
     limit: 500
     column_limit: 50

@@ -3,6 +3,7 @@ connection: "sales_demo_the_look"
 include: "/views/ecommerce/*.view.lkml"
 include: "/views/ecommerce/events_derived_views/*.view.lkml"
 include: "/views/ecommerce/order_items_derived_views/*.view.lkml"
+include: "/Dashboards/*.dashboard.lookml"
 
 access_grant: explore_assistant_tester {
   allowed_values: ["yes"]

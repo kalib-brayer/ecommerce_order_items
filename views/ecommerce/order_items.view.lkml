@@ -542,6 +542,17 @@ view: order_items {
     type: yesno
     sql: ${created_date} <= DATE_SUB(CURRENT_DATE(), INTERVAL 1 YEAR) ;;
   }
+  dimension: reporting_period {
+    group_label: "Order Date"
+    sql: CASE
+              WHEN EXTRACT(YEAR from ${created_raw}) = EXTRACT(YEAR from CURRENT_TIMESTAMP())
+                   AND ${created_raw} < CURRENT_TIMESTAMP()
+                      THEN 'This Year to Date'
+              WHEN EXTRACT(YEAR from ${created_raw}) + 1 = EXTRACT(YEAR from CURRENT_TIMESTAMP())
+                   AND CAST(FORMAT_TIMESTAMP('%j', ${created_raw}) AS INT64) <= CAST(FORMAT_TIMESTAMP('%j', CURRENT_TIMESTAMP()) AS INT64)
+                      THEN 'Last Year to Date'
+         END ;;
+  }
 
   measure: cumulative_total_revenue {
     type: running_total

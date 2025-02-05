@@ -1,6 +1,6 @@
 ---
-- dashboard: brand_performance Austin
-  title: Brand Performance Austin
+- dashboard: brand_performance_austin
+  title: Brand Performance_austin
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
@@ -12,8 +12,8 @@
     model: ecommerce_order_items
     explore: order_items
     type: single_value
-    fields: [products.brand, users.number_of_users]
-    sorts: [users.number_of_users desc 0]
+    fields: [products.brand, users.count]
+    sorts: [users.count desc 0]
     limit: 500
     dynamic_fields:
     - category: table_calculation
@@ -88,7 +88,7 @@
     model: ecommerce_order_items
     explore: order_items
     type: single_value
-    fields: [products.brand, order_items.reporting_period, orders.number_of_orders]
+    fields: [products.brand, order_items.reporting_period, orders.count]
     filters: {}
     sorts: [order_items.reporting_period desc]
     limit: 500
@@ -157,9 +157,9 @@
     model: ecommerce_order_items
     explore: order_items
     type: looker_column
-    fields: [order_items.total_sale_price, products.category, products.department]
+    fields: [order_items.total_sales, products.category, products.department]
     pivots: [products.department]
-    sorts: [products.department, order_items.total_sale_price desc 0]
+    sorts: [products.department, order_items.total_sales desc 0]
     limit: 500
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -208,12 +208,12 @@
     model: ecommerce_order_items
     explore: order_items
     type: looker_line
-    fields: [order_items.total_sale_price, order_items.created_year, order_items.created_day_of_year]
+    fields: [order_items.total_sales, order_items.created_year, order_items.created_day_of_year]
     pivots: [order_items.created_year]
     fill_fields: [order_items.created_year]
     filters:
       order_items.created_day_of_year: "<=90"
-    sorts: [order_items.created_year, order_items.total_sale_price desc 0]
+    sorts: [order_items.created_year, order_items.total_sales desc 0]
     limit: 500
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -239,8 +239,8 @@
     y_axis_combined: true
     show_null_points: true
     interpolation: linear
-    y_axes: [{label: '', orientation: left, series: [{axisId: order_items.total_sale_price,
-            id: order_items.total_sale_price, name: Total Sale Price}], showLabels: true,
+    y_axes: [{label: '', orientation: left, series: [{axisId: order_items.total_sales,
+            id: order_items.total_sales, name: Total Sale Price}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}, {label: !!null '', orientation: right, series: [{axisId: order_items.average_sale_price,
             id: order_items.average_sale_price, name: Average Sale Price}], showLabels: true,
@@ -249,7 +249,7 @@
     x_axis_zoom: true
     y_axis_zoom: true
     series_colors:
-      2023 - order_items.total_sale_price: "#FBB555"
+      2023 - order_items.total_sales: "#FBB555"
     defaults_version: 1
     hidden_pivots: {}
     hidden_fields: []
