@@ -6,6 +6,7 @@ view: orders {
     type: number
     sql: ${TABLE}.order_id ;;
     value_format: "######"
+    description: "identifies an order.  Use this field when a user asks questions about the identity of an order"
   }
   measure: count {
     label: "Count Orders"
@@ -45,12 +46,31 @@ view: orders {
     type: number
     sql: ${TABLE}.user_id ;;
   }
+
+  measure: count_of_customers {
+    sql: ${user_id} ;;
+    description: "distinct count number of customers.  use this field for common questions such as:
+    How many people have shopped with us?
+    What’s the total client base we have?
+    How many unique buyers do we have in the system?
+    Can you tell me the size of our customer base?"
+    tags: ["Customer Volume, Customer Base Size, Total Customers, number of users"]
+    type: count_distinct
+  }
+
   measure: sum_num_of_orders {
-    label: "Count Order Items"
-    description: "Sums the number of order items"
+    description: "number of items in an order.  use this field for questions related to count of items."
     type: sum
     sql: ${num_of_item} ;;
   }
+
+  measure: count_of_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
+    description: "count of distinct orders"
+    tags: ["Completed Orders, Number of Orders,Order Frequency,Order Quantity,Total Orders,Purchase Count,Sales Transactions,Transaction Count,Order Total"]
+  }
+
 ### Hidden Fields {
   dimension_group: delivered {
     type: time

@@ -3,10 +3,6 @@ connection: "sales_demo_the_look"
 include: "/views/ecommerce/*.view.lkml"
 include: "/views/ecommerce/events_derived_views/*.view.lkml"
 include: "/views/ecommerce/order_items_derived_views/*.view.lkml"
-# include: "/views/ecommerce/bare_joins/*.view.lkml"
-# include: "/views/added_views/period_comparison.view.lkml"
-# include: "/views/ecommerce/added_ecommerce_views/*.view.lkml"
-# include: "/views/ecommerce/logistic_model_demo/*.view.lkml"
 
 access_grant: explore_assistant_tester {
   allowed_values: ["yes"]
@@ -20,9 +16,9 @@ datagroup: daily {
 
 ### Explore to ask customer behavior and order summary questions
 explore: order_items{
-  required_access_grants: [explore_assistant_tester]
-  label: "Orders and Users"
-  description: "The explore to ask questions about orders and the users that have purchased"
+   label: "Orders and Users- Explore Assistant Sandbox"
+  description: "Use this explore to ask questions about orders and users for Explore Assistant Sandbox"
+  view_label: "Order Items"
 
   join: orders {
     type: left_outer
