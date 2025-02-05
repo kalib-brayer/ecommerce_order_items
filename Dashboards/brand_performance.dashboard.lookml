@@ -1,6 +1,6 @@
 ---
-- dashboard: brand_performance
-  title: Brand Performance
+- dashboard: brand_performance Austin
+  title: Brand Performance Austin
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true

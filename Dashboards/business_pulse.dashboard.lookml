@@ -1,5 +1,5 @@
-- dashboard: business_pulse
-  title: Business Pulse
+- dashboard: business_pulse Austin
+  title: Business Pulse Austin
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
