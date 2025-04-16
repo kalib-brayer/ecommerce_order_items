@@ -83,65 +83,70 @@ view: order_items {
   # How does it work? End user selects a date on the date selector and sql statements update information to the date parameter
 
   parameter: date_selector {
+    view_label: "POP Fields"
     type: date
     description: "Date selector enables an end user to select any date on a calendar format. Use this parameter to manipulate the count of items on the date,
     month to date, quarter to date, and life to date"
   }
   dimension: is_created_on_date {
-    group_label: "Date Selector Objects"
+    view_label: "POP Fields"
+
     description: "This dimension returns yes if the item's sale date equals the date in the date selector parameter."
     type: yesno
 
     sql: ${created_date} = DATE({% parameter date_selector%});;
   }
   dimension: is_created_mtd {
-    group_label: "Date Selector Objects"
+    view_label: "POP Fields"
+
     description: "This dimension returns yes if the item's sale date is between the first day of the month, in the date selected, and the date selected."
     type: yesno
 
     sql: ${created_date} between DATE(date_trunc({% parameter date_selector%}, month)) and DATE({% parameter date_selector%});;
   }
   dimension: is_created_qtd {
-    group_label: "Date Selector Objects"
+    view_label: "POP Fields"
+
     description: "This dimension returns yes if the item's sale date is between the first day of the quarter, in the date selected, and the date selected."
     type: yesno
 
     sql: ${created_date} between DATE(date_trunc({% parameter date_selector%}, quarter)) and DATE({% parameter date_selector%});;
   }
   dimension: is_created_ltd{
-    group_label: "Date Selector Objects"
+    view_label: "POP Fields"
+
     description: "This dimension returns yes if the item's sale date is before and equal to the date selected"
     type: yesno
 
     sql: ${created_date} <= DATE({% parameter date_selector%});;
   }
   measure: count_items_on_date {
+    view_label: "POP Fields"
 
-    group_label: "Date Selector Objects"
     label: "Count items on date"
     description: "This measure returns the count of items sold on the date selected by the date selector"
     type: count
     filters: [is_created_on_date: "yes"]
   }
   measure: count_items_mtd {
+    view_label: "POP Fields"
 
-    group_label: "Date Selector Objects"
     label: "Count items Month to date"
     description: "This measure returns the count of items sold month to date on the date of the date selector."
     type: count
     filters: [is_created_mtd: "yes"]
   }
   measure: count_items_qtd {
+    view_label: "POP Fields"
 
-    group_label: "Date Selector Objects"
     label: "Count items Quarter to date"
     description: "This measure returns the count of items sold quarter to date on the date of the date selector."
     type: count
     filters: [is_created_qtd: "yes"]
   }
   measure: count_items_ltd {
+    view_label: "POP Fields"
 
-    group_label: "Date Selector Objects"
     label: "Count items Life to date"
     description: "This measure returns the count of all items sold before and equal to the date of the date selector"
     type: count
@@ -151,14 +156,16 @@ view: order_items {
   # Use Case: the end user wants to compare ytd to last ytd but on a date they've selected
   # Solution: end users can use the date parameter to choose a date, which creates this ytd and last ytd on the date they've selected
   dimension: is_created_this_ytd {
-    group_label: "Date Selector Objects"
+    view_label: "POP Fields"
+
     description: "This dimension returns yes if the item's sale date is between the first day of the year, in the date selected, and the date selected."
     type: yesno
 
     sql: ${created_date} between DATE(date_trunc({% parameter date_selector%}, year)) and DATE({% parameter date_selector%});;
   }
   dimension: is_created_last_ytd {
-    group_label: "Date Selector Objects"
+    view_label: "POP Fields"
+
     description: "This dimension returns yes if the item's sale date is between the first day of last year, in the date selected, and last year's date of the date selected"
     type: yesno
 
@@ -168,7 +175,7 @@ view: order_items {
   }
 
   measure: total_final_sale_this_ytd{
-
+    view_label: "POP Fields"
     label: "Sales This YTD"
     description: "Sums the sale price of all items past their return date, not returned, and is in the YTD of the date selected"
     type: sum
@@ -177,6 +184,7 @@ view: order_items {
     filters: [is_past_return_policy: "yes", is_returned: "no", is_created_this_ytd: "yes"]
   }
   measure: total_final_sale_last_ytd{
+    view_label: "POP Fields"
     label: "Sales Last YTD"
     description: "Sums the sale price of all items past their return date, not returned, and is in the last YTD of the date selected"
     type: sum
@@ -186,7 +194,7 @@ view: order_items {
     filters: [is_past_return_policy: "yes", is_returned: "no", is_created_last_ytd: "yes"]
   }
   measure: percent_change_yoy {
-
+    view_label: "POP Fields"
     label: "% Change YOY"
     description: "Returns the percentage increase or decrease of sales from last YTD based on the date selected"
     type: number
