@@ -185,7 +185,7 @@ view: users {
     action:  {
       label: "Send User Gift Certificate"
       url: "https://example.com/posts"
-      icon_url: "https://looker.com/favicon.ico"
+      icon_url: "https://cdn-icons-png.flaticon.com/512/2611/2611083.png"
       #form_url: "https://example.com/ping/{{ value }}/form.json"
       # param: {
       #    name: "name string"
