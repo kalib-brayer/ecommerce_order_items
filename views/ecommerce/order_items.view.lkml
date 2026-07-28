@@ -215,7 +215,7 @@ view: order_items {
     sql: ${sale_price} ;;
     drill_fields: [users.id,users.first_and_last_name,id,products.brand,distribution_centers.id, created_date,
       sale_price,]
-    value_format_name: usd_0
+    value_format_name: dynamic_unit_dollars
   }
 
 
