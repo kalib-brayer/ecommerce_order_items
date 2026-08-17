@@ -1,5 +1,5 @@
 view: orders {
-  sql_table_name: `big-query-sales-demo.thelook_ecommerce.orders` ;;
+  sql_table_name: `rana-synthetic-data.rana_04_anomalies.orders` ;;
 
   dimension: order_id {
     primary_key: yes
@@ -70,6 +70,18 @@ view: orders {
     sql: ${num_of_item} ;;
   }
 
+
+  dimension_group: delivery_time {
+    type: duration
+    intervals: [hour,day]
+    sql_start: ${created_raw} ;;
+    sql_end: ${delivered_raw} ;;
+  }
+
+  measure: average_delivery_days {
+    type: average
+    sql: ${days_delivery_time} ;;
+  }
 
 ### Hidden Fields {
   dimension_group: delivered {

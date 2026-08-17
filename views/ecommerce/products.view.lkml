@@ -1,6 +1,6 @@
 # The name of this view in Looker is "Products"
 view: products {
-  sql_table_name: `big-query-sales-demo.thelook_ecommerce.products` ;;
+  sql_table_name: `rana-synthetic-data.rana_04_anomalies.products` ;;
 
   dimension: id {
     label: "Product ID"

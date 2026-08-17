@@ -1,7 +1,7 @@
 ### Per order item and context around when, what, and how.
 # include: "/views/added_views/period_comparison.view.lkml"
 view: order_items {
-  sql_table_name: `big-query-sales-demo.thelook_ecommerce.order_items` ;;
+  sql_table_name: `rana-synthetic-data.rana_04_anomalies.order_items` ;;
   # extends: [period_comparison]
   # extension: required
 
