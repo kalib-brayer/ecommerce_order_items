@@ -18,7 +18,7 @@ view: orders {
     label: "Order sold"
     description: "Timeframes an order was sold"
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, month, quarter, year, week_of_year]
     sql: ${TABLE}.created_at ;;
   }
   dimension_group: returned {
