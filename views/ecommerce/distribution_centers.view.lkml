@@ -1,5 +1,5 @@
 view: distribution_centers {
-  sql_table_name: `rana-synthetic-data.rana_04_anomalies.distribution_centers` ;;
+  sql_table_name: `big-query-sales-demo.thelook_ecommerce.distribution_centers` ;;
 
   dimension: id {
     label: "Distribution Center ID"

@@ -1,5 +1,5 @@
 view: orders {
-  sql_table_name: `rana-synthetic-data.rana_04_anomalies.orders` ;;
+  sql_table_name: `big-query-sales-demo.thelook_ecommerce.orders` ;;
 
   dimension: order_id {
     primary_key: yes
